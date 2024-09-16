@@ -83,20 +83,35 @@ nav{
 .nav-menu,
 .nav-menu-list{
     display:flex;
-    column-gap: -30px;
+    column-gap:50px;
+    justify-content: center;
+    font-weight: bold;
+    
 }
 
 .nav-menu .nav-list{
     list-style: none;
     position: relative;
+    justify-content: center;
 }
 
-.nav-link{
+.nav-list{
+    list-style: none;
+    justify-content: center;
+}
+
+.nav-list a{
     text-decoration: none;
     color: var(--text-color);
-    /* font-weight: bold; */
-    padding-inline:15px;
-    /* margin-inline: 20px; */
+    font-weight: 500;
+    margin-inline: 20px;
+    justify-content: center;
+}
+
+.nav-list a:hover{
+    color: #8749f2;
+    font-weight: bold;
+    justify-content: center;
 }
 
 #menu-bars{
