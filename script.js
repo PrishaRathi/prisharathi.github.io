@@ -1,115 +1,77 @@
-function menuFuction()
-{
-    var menuBtn = document.getElementById("navMenu");
+// function hamburg(){
+//     const navbar = document.querySelector(".dropdown")
+//     navbar.style.transform = "translateY(0px)"
+// }
 
-    if(menuBtn.className === "nav-menu")
-    {
-        menuBtn.className+= " responsive";
+// function cancel(){
+//     const navbar = document.querySelector(".dropdown")
+//     navbar.style.transform = "translateY(-500px)"
+// }
+
+
+
+
+// Typewriter Effect
+
+const texts = [
+    "Developer",
+    "Engineer",
+    "Designer"
+]
+
+let speed  =100;
+const textElements = document.querySelector(".typewriter-text");
+
+let textIndex = 0;
+let charcterIndex = 0;
+
+function typeWriter(){
+    if (charcterIndex < texts[textIndex].length){
+        textElements.innerHTML += texts[textIndex].charAt(charcterIndex);
+        charcterIndex++;
+        setTimeout(typeWriter, speed); 
     }
-    else
-    {
-        menuBtn.className = "nav-menu";
+    else{
+        setTimeout(eraseText, 1000)
     }
 }
 
-const body = document.querySelector("body"),
-    toggleSwitch = document.getElementById("toggle");
-
-toggleSwitch.addEventListener("click", ()=>{
-    body.classList.toggle("dark");
-});
-
-var typingEffect = new Typed(".typedText", 
-{
-    strings: ["Developer", "Designer", "Coder" ],
-    loop: true,
-    typeSpeed: 100,
-    backSpeed: 80,
-    backDelay: 2000,
-})
-
-const scroll = ScrollReveal({
-    origin: "top",
-    distance: "80px",
-    duration: 2000,
-    reset: true,
-});
-
-
-
-
-scroll.reveal(".text-btn", {delay : 200});
-
-scroll.reveal(".featured-image", {delay : 320});
-
-scroll.reveal(".project-btn", {interval : 320});
-
-scroll.reveal(".top-header", {});
-
-const scroll_left = ScrollReveal({
-    origin: "left",
-    distance: "80px",
-    duration: 2000,
-    reset: true,
-})
-
-scroll_left.reveal(".hello", {delay : 100});
-scroll_left.reveal(".text-info", {delay : 200});
-scroll_left.reveal(".about-info", {delay: 100});
-scroll_left.reveal(".contact-info", {delay: 100});
-scroll_left.reveal("#fitcam", {delay: 100});
-
-const scroll_right = ScrollReveal({
-    origin: "right",
-    distance: "80px",
-    duration: 2000,
-    reset: true,
-})
-
-scroll_right.reveal(".featured-name", {delay : 100});
-
-scroll_right.reveal(".social-icons", {delay : 200});
-scroll_right.reveal(".skill", {delay: 100});
-scroll_right.reveal("#mda", {delay: 100});
-scroll_right.reveal(".form-control", {delay: 100});
-
-const scroll_bottom = ScrollReveal({
-    origin: "bottom",
-    distance: "80px",
-    duration: 2000,
-    reset: true,
-})
-
-
-scroll_bottom.reveal(".patent-info", {interval : 320});
-
-
-const sections = document.querySelectorAll(".section[id]");
-
-function scrollActive()
-{
-    const scrollY = window.scrollY;
-
-    sections.forEach((current) => {
-
-        const sectionHeight = current.offsetHeight,
-
-            sectionTop = current.offsetTop - 50,
-            sectionId = current.getAttribute("id");
-
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight)
-        {
-            document
-                .querySelector(".nav-menu a[href*=" + sectionId + "]")
-                .classList.add("active-link");
-        }
-        else
-        {
-            document
-            .querySelector(".nav-menu a[href*=" + sectionId + "]")
-            .classList.remove("active-link");
-        }
-    });
+function eraseText(){
+    if(textElements.innerHTML.length > 0){
+        textElements.innerHTML = textElements.innerHTML.slice(0,-1);
+        setTimeout(eraseText, 50)
+    }
+    else{
+        textIndex = (textIndex + 1) % texts.length;
+        charcterIndex = 0;
+        setTimeout(typeWriter, 500)
+    }
 }
 
-window.addEventListener("scroll", scrollActive);
+window.onload = typeWriter
+
+let menuIcon = document.querySelector('#menu-icon');
+let navbar = document.querySelector('.navbar');
+let section = document.querySelectorAll('section');
+let navLinks = document.querySelectorAll('header nav a');
+
+window.onscroll = () =>{
+    section.forEach(sec =>{
+        let top = window.scrollY;
+        let offset = sec.offsetTop - 150;
+        let height = sec.offsetHeight;
+        let id = sec.getAttribute('id');
+
+        if(top >= offset && top < offset + height){
+            navLinks.forEach(links => {
+                links.classList.remove('active');
+                document.querySelector('header nav a [href*=' + id + ']').classList.add('active')
+            })
+        }
+    })
+}
+
+menuIcon.onclick = () =>{
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+}
