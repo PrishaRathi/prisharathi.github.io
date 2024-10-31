@@ -15,7 +15,7 @@
     --bg-color: #eee9e9;
     --second-bgb-color: #262425;
     --text-color: rgb(49, 47, 47);
-    --main-color: #8040bc;
+    --main-color: #f9345b;
 }
 
 html{
@@ -158,7 +158,7 @@ span{
     /* box-shadow: 0 0 25px var(--main-color); */
     border-radius: 4rem;
     font-size: 1.6rem;
-    color:black;
+    color:white;
     border: 2px solid transparent;
     letter-spacing: 0.1rem;
     /* font-weight: 600; */
